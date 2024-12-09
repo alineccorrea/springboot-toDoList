@@ -27,8 +27,8 @@ public class FilterTaskAuth extends OncePerRequestFilter{
         
         var servletPath = request.getServletPath();
 
-        //Executar apenas na rota de tasks
-        if(servletPath.equals("/tasks/")) {
+        //Executar apenas quando a rota for de tasks tanto para o create /tasks/ quanto para o update /tasks/{id}
+        if(servletPath.startsWith("/tasks/")) {
 
             //Pegar usuário e senha
             var authorization = request.getHeader("Authorization");
