@@ -66,11 +66,21 @@ public class TaskController {
 
     // http://localhost:8080/tasks/d016d6e0-5ca2-43fe-8eb8-e6e47dea55e8
     @PutMapping("/{idTask}")
-    public TaskModel update(@RequestBody TaskModel taskModel, @PathVariable UUID idTask, HttpServletRequest request) {
+    public ResponseEntity update(@RequestBody TaskModel taskModel, @PathVariable UUID idTask, HttpServletRequest request) {
 
         var task = this.taskRepository.findById(idTask).orElse(null);
+
+        var idUserRequest = request.getAttribute("idUser");
+
+        //Validação se o usuário dono da task é o mesmo autenticado na request de update
+        if(!task.getIdUser().equals(idUserRequest)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Usuário não tem permissão para alterar esta tarefa.");
+        }
+        
         Utils.copyNonNullProperties(taskModel, task);
 
-        return this.taskRepository.save(task);
+        var taskUpdated = this.taskRepository.save(task);
+        return ResponseEntity.ok().body(taskUpdated);
     }
 }
