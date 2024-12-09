@@ -70,6 +70,12 @@ public class TaskController {
 
         var task = this.taskRepository.findById(idTask).orElse(null);
 
+        //Validação se tarefa informada não for encontrada no banco
+        if(task == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Tarefa não encontrada.");
+        }
+
         var idUserRequest = request.getAttribute("idUser");
 
         //Validação se o usuário dono da task é o mesmo autenticado na request de update
