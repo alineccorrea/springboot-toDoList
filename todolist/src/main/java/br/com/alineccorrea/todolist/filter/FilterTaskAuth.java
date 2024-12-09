@@ -26,7 +26,7 @@ public class FilterTaskAuth extends OncePerRequestFilter{
 
         
         var servletPath = request.getServletPath();
-        
+
         //Executar apenas na rota de tasks
         if(servletPath.equals("/tasks/")) {
 
@@ -58,6 +58,11 @@ public class FilterTaskAuth extends OncePerRequestFilter{
                 var passwordVerify = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
 
                 if(passwordVerify.verified) {
+                    //setando o id do usuário na request
+                    /*Também garante que mesmo o usuário enviando um id diferente na request, 
+                    o filter vai setar o id correto do usuário autenticado*/
+                    request.setAttribute("idUser", user.getId());
+                    //segue execução
                     filterChain.doFilter(request, response);
                 } else {
                     response.sendError(401);

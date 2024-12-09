@@ -22,8 +22,7 @@ public class UserController {
         var user = this.userRepository.findByUsername(userModel.getUsername());
 
         if(user != null){
-            //Mensagem de erro
-            //Status code
+            //Mensagem de erro e Status code
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuário '" + userModel.getUsername() + "' já existe no banco de dados (User already exists)");
         }
 
