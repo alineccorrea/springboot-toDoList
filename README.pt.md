@@ -40,7 +40,7 @@ Este projeto é uma API para cadastro de usuários e também cadastro, atualiza�
 - Resposta:
   - `HTTP Status Code: 200` Tarefa cadastrada com sucesso.
 `O corpo da response trás os dados cadastrados da tarefa.`
-  - `HTTP Status Code: 400` Indica que o título utrapassou 50 caracteres.
+  - `HTTP Status Code: 400` Indica que o título ultrapassou 50 caracteres.
 
 ### 2. Listar tarefa 
 - Método: `GET`
