@@ -1,2 +1,5 @@
 # springboot-toDoList
-toDo List com SpringBoot
+
+ ## README  
+- 🇺🇸 [English](README.en.md)
+- 🇧🇷 [Português](README.pt.md) 
